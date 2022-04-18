@@ -1,14 +1,16 @@
-import * as http from 'http';
+import fs from 'fs'
+import * as http from 'http'
 
 http.createServer(function(req,res){
-    console.log(req.url)
+    let recurso = req.url
 
-    if(req.url == '/pedro') {
-        fs.readFile('html/pedro.html',(err, data) => {
+    if(recurso === '/pedro.html'){
+        fs.readFile('./html/pedro.html', function (err, data) {
             res.write(data);
-            res.end();
         })
+    } else {
+        res.write('<p>Hola Mundo</p>')
     }
-    res.write("Hola Mundo");
     res.end();
-}).listen(1986)
+
+}).listen(1880)
